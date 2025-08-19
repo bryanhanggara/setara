@@ -35,7 +35,7 @@
                         <a class="nav-link text-primary" href="{{ url('/') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-primary" href="">Pojok Cerita</a>
+                        <a class="nav-link text-primary" href="{{ url('/pojok-cerita') }}">Pojok Cerita</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-primary" href="">Berita</a>

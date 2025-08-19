@@ -16,4 +16,9 @@ class SastraTulis extends Model
         'image',
     ];
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'sastra_tulis_id')->latest();
+    }
+
 }

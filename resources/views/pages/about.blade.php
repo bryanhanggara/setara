@@ -65,7 +65,7 @@
                 <div class="col-12 col-md-6 col-lg-5">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="rounded-top" style="position: relative; width: 100%; padding-top: 75%; overflow: hidden;">
-                            <img src="{{ asset('img/avatar/avatar-2.png') }}" alt="Rahmadoni Saputra" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ asset('FE_JELITA/assets/img/doni.JPG') }}" alt="Rahmadoni Saputra" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div class="card-body text-center">
                             <h5 class="mb-1">Rahmadoni Saputra</h5>
@@ -77,7 +77,7 @@
                 <div class="col-12 col-md-6 col-lg-5">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="rounded-top" style="position: relative; width: 100%; padding-top: 75%; overflow: hidden;">
-                            <img src="{{ asset('img/avatar/avatar-1.png') }}" alt="Shopi Attika Putri" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ asset('FE_JELITA/assets/img/shopi.JPG') }}" alt="Shopi Attika Putri" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div class="card-body text-center">
                             <h5 class="mb-1">Shopi Attika Putri</h5>

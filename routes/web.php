@@ -4,10 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\PojokCeritaController;
 use App\Http\Controllers\SastraTulisController;
 
 Route::get('/', [HomeController::class,'index']);
 Route::get('/tentang-jelita', [HomeController::class,'tentang']);
+Route::get('/pojok-cerita', [PojokCeritaController::class,'index'])->name('pojok-cerita.index');
+Route::get('/pojok-cerita/{id}', [PojokCeritaController::class,'showThumb'])->name('pojok-cerita.thumb');
+Route::get('/pojok-cerita/open-book/{id}', [PojokCeritaController::class,'showOpenBook'])->name('pojok-cerita.open-book');
+Route::post('/pojok-cerita/{id}/comments', [PojokCeritaController::class,'storeComment'])
+    ->middleware('auth')
+    ->name('pojok-cerita.comments.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
