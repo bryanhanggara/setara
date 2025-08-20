@@ -16,14 +16,19 @@ Route::post('/pojok-cerita/{id}/comments', [PojokCeritaController::class,'storeC
     ->middleware('auth')
     ->name('pojok-cerita.comments.store');
 
+// News routes
+Route::get('/berita', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.index');
+Route::get('/berita/{news}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->middleware('auth','isAdmin')->group(function() {
     Route::get('/', [AdminController::class, 'index']);
     Route::resource('sastra', SastraTulisController::class);
+    Route::resource('news', \App\Http\Controllers\Admin\NewsController::class)->names('admin.news');
 });
 
 Route::middleware('auth')->group(function () {

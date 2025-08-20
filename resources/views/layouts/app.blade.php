@@ -38,7 +38,7 @@
                         <a class="nav-link text-primary" href="{{ url('/pojok-cerita') }}">Pojok Cerita</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-primary" href="">Berita</a>
+                        <a class="nav-link text-primary" href="{{ route('news.index') }}">Berita</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-primary" href="{{ url('/tentang-jelita') }}">Tentang</a>

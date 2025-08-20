@@ -24,7 +24,7 @@
            <i class="bi bi-star-fill text-warning fs-5"></i>
            <i class="bi bi-star-half text-warning fs-5"></i>
          </div>
-         <a href="{{ route('pojok-cerita.open-book', $post->id) }}" class="btn px-4 py-2 fw-bold text-white rounded-pill" style="background-color:#F47CE0;">Baca Cerita</a>
+         <a href="{{ route('pojok-cerita.open-book', $post->id) }}" class="btn px-4 py-2 fw-bold text-white rounded-pill" style="background-color:#D31611;">Baca Cerita</a>
        </div>
      </div>
    </section>

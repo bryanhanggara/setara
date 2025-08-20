@@ -57,8 +57,13 @@
                                 <h4>Total Berita</h4>
                             </div>
                             <div class="card-body">
-                                1,201
+                                {{ \App\Models\News::count() }}
                             </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ route('admin.news.index') }}" class="text-decoration-none">
+                                <small>Kelola Berita <i class="fas fa-arrow-right"></i></small>
+                            </a>
                         </div>
                     </div>
                 </div>

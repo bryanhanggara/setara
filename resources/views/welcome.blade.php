@@ -100,7 +100,7 @@
                                     <p class="article-excerpt">
                                         {{ Str::limit(strip_tags($mainArticle->body), 150, '...') }}
                                     </p>
-                                    <a href="{{ route('sastra.show', $mainArticle->id) }}" class="text-primary text-decoration-none">Read More...</a>
+                                    <a href="{{ route('pojok-cerita.thumb', $mainArticle->id) }}" class="text-primary text-decoration-none">Read More...</a>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                           </div>
                           <h5 class="fw-bold text-dark">{{ $article->title }}</h5>
                           <p class="text-muted small">{{ Str::limit(strip_tags($article->body), 100, '...') }}</p>
-                          <a href="{{ route('sastra.show', $article->id) }}" class="text-pink fw-bold text-decoration-none">Read More...</a>
+                          <a href="{{ route('spojok-cerita.thumb', $article->id) }}" class="text-pink fw-bold text-decoration-none">Read More...</a>
                       </div>
                   </div>
               </div>
@@ -136,64 +136,94 @@
         </div>
     </section>
 
-    <!-- Reader's Choice Section -->
-    <section class="readers-choice-section py-5 bg-light">
+    <!-- News Section -->
+    <section class="news-section py-5 bg-light">
         <div class="container">
             <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                <h2 class="section-title">Berita</h2>
-                <button class="btn btn-primary">View All</button>
+                <h2 class="section-title">Berita Terkini</h2>
+                <a href="{{ route('news.index') }}" class="btn btn-primary">Lihat Semua</a>
             </div>
             
-            <!-- Main Article -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <div class="main-article">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop" 
-                                     class="img-fluid rounded" alt="Train Journey">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="badge bg-secondary">Travel</span>
-                                        <span class="text-muted ms-2">10 March 2023</span>
+            @if($latestNews->count() > 0)
+                <!-- Main News Article -->
+                @if($latestNews->first())
+                <div class="row mb-5">
+                    <div class="col-lg-12">
+                        <div class="main-article">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @if($latestNews->first()->image)
+                                        <img src="{{ asset('storage/news/' . $latestNews->first()->image) }}" 
+                                             class="img-fluid rounded" alt="{{ $latestNews->first()->title }}"
+                                             style="height: 300px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-secondary d-flex align-items-center justify-content-center rounded" 
+                                             style="height: 300px;">
+                                            <i class="fas fa-newspaper fa-3x text-white"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="article-content">
+                                        <div class="article-meta">
+                                            <span class="badge bg-primary">Berita</span>
+                                            <span class="text-muted ms-2">{{ $latestNews->first()->created_at->format('d M Y') }}</span>
+                                        </div>
+                                        <h3 class="article-title">{{ $latestNews->first()->title }}</h3>
+                                        <p class="article-excerpt">
+                                            {{ Str::limit(strip_tags($latestNews->first()->content), 200) }}
+                                        </p>
+                                        <a href="{{ route('news.show', $latestNews->first()->slug) }}" 
+                                           class="text-primary text-decoration-none">Baca Selengkapnya...</a>
                                     </div>
-                                    <h3 class="article-title">Train Or Bus Journey? Which one suits?</h3>
-                                    <p class="article-excerpt">
-                                        When planning your next adventure, choosing between train and bus travel can be a crucial decision. 
-                                        Each mode of transportation offers unique advantages and experiences that can significantly impact your journey.
-                                    </p>
-                                    <a href="#" class="text-primary text-decoration-none">Read More...</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Small Articles Grid -->
-          <!-- Small Articles -->
-          <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="article-card">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop" 
-                        class="card-img-top rounded-4" alt="Travel">
-                    <div class="card-body px-0">
-                    <div class="article-meta mb-2">
-                        <br>
-                        <span class="text-pink fw-bold">Travel</span>
-                        <span class="text-muted ms-2">13 March 2023</span>
+                @endif
+                
+                <!-- News Articles Grid -->
+                <div class="row g-4">
+                    @foreach($latestNews->skip(1) as $news)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="article-card">
+                            @if($news->image)
+                                <img src="{{ asset('storage/news/' . $news->image) }}" 
+                                     class="card-img-top rounded-4" alt="{{ $news->title }}"
+                                     style="height: 200px; object-fit: cover;">
+                            @else
+                                <div class="bg-secondary d-flex align-items-center justify-content-center rounded-4" 
+                                     style="height: 200px;">
+                                    <i class="fas fa-newspaper fa-2x text-white"></i>
+                                </div>
+                            @endif
+                            <div class="card-body px-0">
+                                <div class="article-meta mb-2">
+                                    <span class="text-pink fw-bold">Berita</span>
+                                    <span class="text-muted ms-2">{{ $news->created_at->format('d M Y') }}</span>
+                                </div>
+                                <h5 class="fw-bold text-dark">{{ Str::limit($news->title, 60) }}</h5>
+                                <p class="text-muted small">{{ Str::limit(strip_tags($news->content), 100) }}</p>
+                                <a href="{{ route('news.show', $news->slug) }}" 
+                                   class="text-pink fw-bold text-decoration-none">Baca Selengkapnya...</a>
+                            </div>
+                        </div>
                     </div>
-                    <h5 class="fw-bold text-dark">8 Rules Of Travelling In Sea You Need To Know</h5>
-                    <p class="text-muted small">Travelling in sea has many advantages. Some of the advantages of transporting goods by sea include: you can ship large volumes at costs</p>
-                    <a href="#" class="text-pink fw-bold text-decoration-none">Read More...</a>
+                    @endforeach
+                </div>
+            @else
+                <!-- No News Available -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center py-5">
+                            <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
+                            <h4 class="text-muted">Belum ada berita</h4>
+                            <p class="text-muted">Berita akan segera hadir di sini</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        
-        </div>
-
+            @endif
         </div>
     </section>
 
