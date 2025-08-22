@@ -2,7 +2,7 @@
 
 @section('title', 'Kelola Berita')
 
-@section('content')
+@section('main')
 <div class="main-content">
     <section class="section">
         <div class="section-header">
@@ -49,7 +49,7 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>
                                                 @if($item->image)
-                                                    <img src="{{ asset('storage/news/' . $item->image) }}" 
+                                                    <img src="{{ Storage::url($item->image) }}" 
                                                          alt="{{ $item->title }}" 
                                                          class="img-thumbnail" 
                                                          style="width: 60px; height: 60px; object-fit: cover;">

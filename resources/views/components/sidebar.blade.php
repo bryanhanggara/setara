@@ -34,7 +34,7 @@
                 <ul class="dropdown-menu">
                     <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
                         <a class="nav-link"
-                            href="">Berita</a>
+                            href="{{ route('admin.news.index') }}">Berita</a>
                     </li>
                 </ul>
             </li>

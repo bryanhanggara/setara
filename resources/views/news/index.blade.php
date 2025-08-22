@@ -19,7 +19,7 @@
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100 shadow-sm">
                 @if($item->image)
-                    <img src="{{ asset('storage/news/' . $item->image) }}" 
+                    <img src="{{ Storage::url($item->image) }}" 
                          class="card-img-top" 
                          alt="{{ $item->title }}"
                          style="height: 200px; object-fit: cover;">

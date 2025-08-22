@@ -22,28 +22,26 @@ class NewsController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:published,draft'
-        ]);
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'status' => 'required|in:published,draft'
+    ]);
 
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
+    $data = $request->all();
+    $data['slug'] = Str::slug($request->title);
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/news', $imageName);
-            $data['image'] = $imageName;
-        }
-
-        News::create($data);
-
-        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil ditambahkan!');
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('news', 'public');
     }
+
+    News::create($data);
+
+    return redirect()->route('admin.news.index')->with('success', 'Berita berhasil ditambahkan!');
+}
+
 
     public function edit(News $news)
     {

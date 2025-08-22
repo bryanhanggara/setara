@@ -126,7 +126,7 @@
                           </div>
                           <h5 class="fw-bold text-dark">{{ $article->title }}</h5>
                           <p class="text-muted small">{{ Str::limit(strip_tags($article->body), 100, '...') }}</p>
-                          <a href="{{ route('spojok-cerita.thumb', $article->id) }}" class="text-pink fw-bold text-decoration-none">Read More...</a>
+                          <a href="{{ route('pojok-cerita.thumb', $article->id) }}" class="text-pink fw-bold text-decoration-none">Read More...</a>
                       </div>
                   </div>
               </div>
@@ -152,16 +152,18 @@
                         <div class="main-article">
                             <div class="row">
                                 <div class="col-md-4">
-                                    @if($latestNews->first()->image)
-                                        <img src="{{ asset('storage/news/' . $latestNews->first()->image) }}" 
-                                             class="img-fluid rounded" alt="{{ $latestNews->first()->title }}"
-                                             style="height: 300px; object-fit: cover;">
-                                    @else
-                                        <div class="bg-secondary d-flex align-items-center justify-content-center rounded" 
-                                             style="height: 300px;">
-                                            <i class="fas fa-newspaper fa-3x text-white"></i>
-                                        </div>
-                                    @endif
+                                  @if($latestNews->first()->image)
+                                  <img src="{{ Storage::url($latestNews->first()->image) }}" 
+                                       class="img-fluid rounded" 
+                                       alt="{{ $latestNews->first()->title }}"
+                                       style="height: 300px; object-fit: cover;">
+                              @else
+                                  <div class="bg-secondary d-flex align-items-center justify-content-center rounded" 
+                                       style="height: 300px;">
+                                      <i class="fas fa-newspaper fa-3x text-white"></i>
+                                  </div>
+                              @endif
+                              
                                 </div>
                                 <div class="col-md-8">
                                     <div class="article-content">
@@ -189,7 +191,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="article-card">
                             @if($news->image)
-                                <img src="{{ asset('storage/news/' . $news->image) }}" 
+                                <img src="{{ Storage::url($news->image) }}" 
                                      class="card-img-top rounded-4" alt="{{ $news->title }}"
                                      style="height: 200px; object-fit: cover;">
                             @else
@@ -230,8 +232,11 @@
     <!--Partner Section-->
     <section class="partner-section py-5 bg-light">
         <div class="container text-center">
-          <h2 class="mb-4 fw-bold">Our Partners</h2>
+          <h2 class="mb-4 fw-bold">Dipersembahkan Oleh</h2>
           <div class="row justify-content-center align-items-center g-4">
+            <div class="col-6 col-md-3 col-lg-2">
+              <img src="{{ asset('FE_JELITA/assets/img/tutwuri.png') }}" class="img-fluid partner-logo" alt="Partner 1">
+            </div>
             <div class="col-6 col-md-3 col-lg-2">
               <img src="{{ asset('FE_JELITA/assets/img/bbpss.png') }}" class="img-fluid partner-logo" alt="Partner 1">
             </div>
@@ -252,8 +257,8 @@
           </h2>
           
           <form class="d-flex justify-content-center flex-wrap gap-2 mb-3">
-            <input type="email" class="form-control form-control-lg email-input" placeholder="Your Email">
-            <button type="submit" class="btn btn-light btn-lg fw-semibold">Get started</button>
+            <input type="email" class="form-control form-control-lg email-input" placeholder="Pos el">
+            <button type="submit" class="btn btn-light btn-lg fw-semibold">Mulai</button>
           </form>
       
           <p class="text-white-50">

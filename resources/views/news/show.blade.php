@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+ <!-- Hero Section -->
+ <section class="hero-section">
+        
+ </section>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
@@ -19,14 +24,14 @@
 
                 @if($news->image)
                 <div class="mb-4">
-                    <img src="{{ asset('storage/news/' . $news->image) }}" 
+                    <img src="{{ Storage::url($news->image) }}" 
                          class="img-fluid rounded shadow" 
                          alt="{{ $news->title }}">
                 </div>
                 @endif
 
                 <div class="content">
-                    {!! nl2br(e($news->content)) !!}
+                    {!! $news->content !!}
                 </div>
             </article>
 
@@ -63,7 +68,7 @@
                     @forelse($latestNews as $item)
                     <div class="media mb-3">
                         @if($item->image)
-                            <img src="{{ asset('storage/news/' . $item->image) }}" 
+                            <img src="{{ Storage::url($item->image) }}" 
                                  class="mr-3 rounded" 
                                  alt="{{ $item->title }}"
                                  style="width: 64px; height: 64px; object-fit: cover;">

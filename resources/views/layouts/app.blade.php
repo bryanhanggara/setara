@@ -49,7 +49,7 @@
                     <button class="btn btn-link text-primary me-3">
                         <i class="fas fa-search"></i>
                     </button>
-                    <button class="btn btn-primary">Login</button>
+                    <button class="btn btn-primary">Masuk</button>
                 </div>
             </div>
         </div>
@@ -64,10 +64,9 @@
           <h4 class="fw-bold mb-4">Setara</h4>
       
           <ul class="nav justify-content-center mb-4">
-            <li class="nav-item"><a href="#" class="nav-link px-3 text-dark">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-3 text-dark">Blog</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-3 text-dark">About</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-3 text-dark">Contact Us</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-dark">Beranda</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-dark">Pojok Cerita</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-dark">Tentang</a></li>
           </ul>
       
           <div class="social-icons d-flex justify-content-center gap-3 mb-4">

@@ -2,7 +2,7 @@
 
 @section('title', 'Tambah Berita')
 
-@section('content')
+@section('main')
 <div class="main-content">
     <section class="section">
         <div class="section-header">
@@ -38,15 +38,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="content">Konten Berita <span class="text-danger">*</span></label>
-                                    <textarea class="form-control @error('content') is-invalid @enderror" 
-                                              id="content" 
-                                              name="content" 
-                                              rows="10" 
-                                              required>{{ old('content') }}</textarea>
-                                    @error('content')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label>Description</label>
+                                    <textarea name="content" id="content" class="tinymce" rows="10">{{ old('content') }}</textarea>
                                 </div>
 
                                 <div class="form-group">
@@ -121,4 +114,16 @@
         }
     });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.0/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          entity_encoding: 'raw',
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+          
+        });
+      </script>
 @endpush 
