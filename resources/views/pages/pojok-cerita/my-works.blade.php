@@ -90,7 +90,7 @@
                                                     @endif
                                                 </td>
                                                 
-                                                <td>{{ $work->created_at->format('d/m/Y H:i') }}</td>
+                                                <td>@indonesianDateTime($work->created_at)</td>
                                                 <td>
                                                     <span class="badge badge-secondary">{{ $work->views }}</span>
                                                 </td>

@@ -9,14 +9,14 @@
                 <h1 class="display-5 mb-3">Berkenalan Dengan Kami                </h1>
                 <p>Dari Duta Bahasa dan Balai Bahasa Provinsi Sumatra Selatan, untuk harapan di balik jeruji
                 </p>
-                <button class="btn btn-pink mt-3">Lihat Selengkapnya</button>
+                <a href="#view" class="btn btn-pink mt-3">Lihat Selengkapnya</a>
               </div>
             </div>
           </div>
     </section>
 
     <!--Detail Donasi-->
-    <section class="text-dark py-5">
+    <section class="text-dark py-5" id="view">
         <div class="container">
           <div class="mb-5">
             <h6 class="text-uppercase text-secondary fw-bold">SETARA</h6>

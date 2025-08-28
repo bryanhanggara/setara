@@ -66,7 +66,7 @@
                                                     {{ $item->status === 'published' ? 'Dipublikasi' : 'Draft' }}
                                                 </span>
                                             </td>
-                                            <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
+                                            <td>@indonesianDateTime($item->created_at)</td>
                                             <td>
                                                 <a href="{{ route('admin.news.edit', $item) }}" 
                                                    class="btn btn-sm btn-info">

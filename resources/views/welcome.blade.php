@@ -61,7 +61,7 @@
                         <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="rounded me-3" style="width:60px;height:60px;object-fit:cover;">
                         <div>
                           <a href="{{ route('pojok-cerita.thumb', $item->id) }}" class="fw-semibold text-white text-decoration-none">{{ $item->title }}</a>
-                          <div class="small text-white">{{ $item->created_at->format('d M Y') }}</div>
+                                                          <div class="small text-white">@indonesianDateShort($item->created_at)</div>
                         </div>
                       </li>
                     @endforeach
@@ -113,7 +113,7 @@
                                 <div class="article-content">
                                     <div class="article-meta">
                                         <span class="badge bg-secondary">{{ strtoupper($mainArticle->category) }}</span>
-                                        <span class="text-muted ms-2">{{ $mainArticle->created_at->format('d F Y') }}</span>
+                                        <span class="text-muted ms-2">@indonesianDate($mainArticle->created_at)</span>
                                         <span class="text-muted ms-2">{{ number_format((int)($mainArticle->views ?? 0)) }} kali dibaca</span>
                                     </div>
                                     <h3 class="article-title">{{ $mainArticle->title }}</h3>
@@ -142,7 +142,7 @@
                           <div class="article-meta mb-2">
                               <br>
                               <span class="text-pink fw-bold">{{ ucfirst(strtolower($article->category)) }}</span>
-                              <span class="text-muted ms-2">{{ $article->created_at->format('d F Y') }}</span>
+                                                                  <span class="text-muted ms-2">@indonesianDateShort($article->created_at)</span>
                               <span class="text-muted ms-2">{{ number_format((int)($article->views ?? 0)) }} kali dibaca</span>
                           </div>
                           <h5 class="fw-bold text-dark">{{ $article->title }}</h5>
@@ -190,7 +190,7 @@
                                     <div class="article-content">
                                         <div class="article-meta">
                                             <span class="badge bg-primary">Berita</span>
-                                            <span class="text-muted ms-2">{{ $latestNews->first()->created_at->format('d M Y') }}</span>
+                                            <span class="text-muted ms-2">@indonesianDate($latestNews->first()->created_at)</span>
                                         </div>
                                         <h3 class="article-title">{{ $latestNews->first()->title }}</h3>
                                         <p class="article-excerpt">
@@ -224,7 +224,7 @@
                             <div class="card-body px-0">
                                 <div class="article-meta mb-2">
                                     <span class="badge bg-primary">Berita</span>
-                                    <span class="text-muted ms-2">{{ $news->created_at->format('d M Y') }}</span>
+                                    <span class="text-muted ms-2">@indonesianDateShort($news->created_at)</span>
                                 </div>
                                 <h5 class="fw-bold text-dark">{{ $news->title }}</h5>
                                 <p class="text-muted small">{{ Str::limit(strip_tags($news->content), 120) }}</p>
@@ -268,9 +268,24 @@
             Setiap kisah adalah perjalanan jiwa
           </h2>
           
-          <form class="d-flex justify-content-center flex-wrap gap-2 mb-3">
-            <input type="email" class="form-control form-control-lg email-input" placeholder="Pos el">
-            <button type="submit" class="btn btn-light btn-lg fw-semibold">Mulai</button>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('success') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          @endif
+          
+          @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('error') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          @endif
+          
+          <form action="{{ route('newsletter.subscribe') }}" method="POST" class="d-flex justify-content-center flex-wrap gap-2 mb-3">
+            @csrf
+            <input type="email" name="email" class="form-control form-control-lg email-input" placeholder="Masukkan email Anda" required>
+            <button type="submit" class="btn btn-light btn-lg fw-semibold">Berlangganan</button>
           </form>
       
           <p class="text-white-50">

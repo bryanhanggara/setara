@@ -7,6 +7,7 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -77,10 +78,8 @@
           </ul>
       
           <div class="social-icons d-flex justify-content-center gap-3 mb-4">
-            <a href="#" class="circle-icon">FB</a>
-            <a href="#" class="circle-icon">IG</a>
-            <a href="#" class="circle-icon">LN</a>
-            <a href="#" class="circle-icon">YT</a>
+            <a href="#" class="circle-icon"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="circle-icon"><i class="bi bi-youtube"></i></a>
           </div>
       
           <hr style="border-color: #f47ce0; width: 90%; margin: 0 auto;">

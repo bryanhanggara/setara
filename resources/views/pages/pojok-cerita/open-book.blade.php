@@ -70,7 +70,7 @@
              <div class="flex-grow-1">
                <p class="fw-semibold mb-1">{{ $comment->user->name ?? 'Pengguna' }}</p>
                <p class="mb-2">{{ $comment->body }}</p>
-               <div class="text-muted small">{{ optional($comment->created_at)->diffForHumans() }}</div>
+               <div class="text-muted small">@timeAgo($comment->created_at)</div>
              </div>
              @auth
                @if(auth()->id() === $comment->user_id || auth()->user()->role === 'ADMIN')

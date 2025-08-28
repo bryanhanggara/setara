@@ -15,7 +15,7 @@
                     <h1 class="display-4 font-weight-bold text-primary mb-3">{{ $news->title }}</h1>
                     <div class="d-flex align-items-center text-muted mb-3">
                         <i class="fas fa-calendar-alt mr-2"></i>
-                        <span>{{ $news->created_at->format('d M Y, H:i') }}</span>
+                        <span>@indonesianDateTime($news->created_at)</span>
                         <span class="mx-2">•</span>
                         <i class="fas fa-user mr-2"></i>
                         <span>Admin</span>
@@ -87,7 +87,7 @@
                                 </a>
                             </h6>
                             <small class="text-muted">
-                                {{ $item->created_at->format('d M Y') }}
+                                @indonesianDateShort($item->created_at)
                             </small>
                         </div>
                     </div>

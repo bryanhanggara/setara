@@ -36,7 +36,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <div class="mb-2">
                                         <span class="badge bg-primary">{{ strtoupper($post->category) }}</span>
-                                        <small class="text-muted ms-2">{{ $post->created_at->format('d M Y') }}</small>
+                                        <small class="text-muted ms-2">@indonesianDateShort($post->created_at)</small>
                                     </div>
                                     <h5 class="card-title">{{ $post->title }}</h5>
                                     <p class="card-text text-muted flex-grow-1">
