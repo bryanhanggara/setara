@@ -66,9 +66,28 @@
 
        @forelse(($comments ?? []) as $comment)
          <div class="bg-white p-3 rounded border mb-2">
-           <p class="fw-semibold mb-1">{{ $comment->user->name ?? 'Pengguna' }}</p>
-           <p class="mb-2">{{ $comment->body }}</p>
-           <div class="text-muted small">{{ optional($comment->created_at)->diffForHumans() }}</div>
+           <div class="d-flex justify-content-between align-items-start">
+             <div class="flex-grow-1">
+               <p class="fw-semibold mb-1">{{ $comment->user->name ?? 'Pengguna' }}</p>
+               <p class="mb-2">{{ $comment->body }}</p>
+               <div class="text-muted small">{{ optional($comment->created_at)->diffForHumans() }}</div>
+             </div>
+             @auth
+               @if(auth()->id() === $comment->user_id || auth()->user()->role === 'ADMIN')
+                 <form action="{{ route('pojok-cerita.comments.delete', ['id' => $post->id, 'commentId' => $comment->id]) }}" 
+                       method="POST" 
+                       class="ms-2"
+                       onsubmit="return confirm('Apakah Anda yakin ingin menghapus komentar ini?')">
+                   @csrf
+                   @method('DELETE')
+                   <input type="hidden" name="page" value="{{ $current ?? 1 }}">
+                   <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus Komentar">
+                     <i class="fas fa-trash"></i>
+                   </button>
+                 </form>
+               @endif
+             @endauth
+           </div>
          </div>
        @empty
          <div class="bg-white p-3 rounded border">Belum ada komentar.</div>

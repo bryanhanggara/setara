@@ -9,7 +9,7 @@
                 <p class="text-uppercase fw-bold text-pink" style="color:#fff">Selamat Datang</p>
                 <h1 class="display-5 mb-3">Sembuh dan Tumbuh Bersama Sastra</h1>
                 <p>Media Literasi untuk Pemberdayaan dan Kesehatan Mental Warga Binaan Perempuan</p>
-                <button class="btn btn-primary mt-3">Read more</button>
+                <button class="btn btn-primary mt-3">Selengkapnya</button>
               </div>
               <div class="col-lg-6 hero-image mt-4 mt-lg-0 text-center">
                 <img src="{{ asset('FE_JELITA/assets/img/book.png') }}" alt=" Art"> <!-- Ganti your-image.jpg dengan path gambar kamu -->
@@ -23,25 +23,24 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="search-form">
+                    <form action="{{ route('pojok-cerita.search') }}" method="GET" class="search-form">
                         <div class="row g-3">
                             <div class="col-md-5">
-                                <input type="text" class="form-control" placeholder="Tulis Judul Disini">
+                                <input type="text" name="title" class="form-control" placeholder="Tulis Judul Disini" value="{{ request('title') }}">
                             </div>
                             <div class="col-md-5">
-                                <select class="form-select">
-                                    <option selected>Genre</option>
-                                    <option>Romance</option>
-                                    <option>Mystery</option>
-                                    <option>Fantasy</option>
-                                    <option>Drama</option>
+                                <select name="category" class="form-select">
+                                    <option value="">Semua Kategori</option>
+                                    <option value="CERPEN" {{ request('category') == 'CERPEN' ? 'selected' : '' }}>Cerpen</option>
+                                    <option value="PUISI" {{ request('category') == 'PUISI' ? 'selected' : '' }}>Puisi</option>
+                                    <option value="KARYA PEGAWAI" {{ request('category') == 'KARYA PEGAWAI' ? 'selected' : '' }}>Karya Pegawai</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-primary w-100">Cari Judul</button>
+                                <button type="submit" class="btn btn-primary w-100">Cari Judul</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -52,19 +51,39 @@
         <div class="container my-5">
             <div class="row g-4">
               <div class="col-md-6">
-                <div class="book-card">
-                  <div class="card-overlay">
-                    <h5 class="fw-bold">Baru Saja Terbit</h5>
-                    <button class="btn btn-primary mt-2">Buka</button>
+                <div class="book-card p-4 rounded-4 bg-light">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Baru Saja Terbit</h5>
                   </div>
+                  <ul class="list-unstyled mb-0">
+                    @foreach(($recentArticles ?? []) as $item)
+                      <li class="mb-3 d-flex align-items-start">
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="rounded me-3" style="width:60px;height:60px;object-fit:cover;">
+                        <div>
+                          <a href="{{ route('pojok-cerita.thumb', $item->id) }}" class="fw-semibold text-white text-decoration-none">{{ $item->title }}</a>
+                          <div class="small text-white">{{ $item->created_at->format('d M Y') }}</div>
+                        </div>
+                      </li>
+                    @endforeach
+                  </ul>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="book-card">
-                  <div class="card-overlay">
-                    <h5 class="fw-bold">Terpopuler</h5>
-                    <button class="btn btn-primary mt-2">Buka</button>
+                <div class="book-card p-4 rounded-4 bg-light">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Paling Banyak Dilihat</h5>
                   </div>
+                  <ul class="list-unstyled mb-0">
+                    @foreach(($popularArticles ?? []) as $item)
+                      <li class="mb-3 d-flex align-items-start">
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="rounded me-3" style="width:60px;height:60px;object-fit:cover;">
+                        <div>
+                          <a href="{{ route('pojok-cerita.thumb', $item->id) }}" class="fw-semibold text-white text-decoration-none">{{ $item->title }}</a>
+                          <div class="small text-white">{{ number_format((int)($item->views ?? 0)) }} kali dibaca</div>
+                        </div>
+                      </li>
+                    @endforeach
+                  </ul>
                 </div>
               </div>
             </div>
@@ -75,8 +94,8 @@
     <section class="recommendation-section py-5">
         <div class="container">
             <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                <h2 class="section-title">Rekomendasi Jelita</h2>
-                <button class="btn btn-primary">View All</button>
+                <h2 class="section-title">Rekomendasi Setara</h2>
+                <button class="btn btn-primary">Lihat Semua</button>
             </div>
             
             <!-- Main Article -->
@@ -95,12 +114,13 @@
                                     <div class="article-meta">
                                         <span class="badge bg-secondary">{{ strtoupper($mainArticle->category) }}</span>
                                         <span class="text-muted ms-2">{{ $mainArticle->created_at->format('d F Y') }}</span>
+                                        <span class="text-muted ms-2">{{ number_format((int)($mainArticle->views ?? 0)) }} kali dibaca</span>
                                     </div>
                                     <h3 class="article-title">{{ $mainArticle->title }}</h3>
                                     <p class="article-excerpt">
                                         {{ Str::limit(strip_tags($mainArticle->body), 150, '...') }}
                                     </p>
-                                    <a href="{{ route('pojok-cerita.thumb', $mainArticle->id) }}" class="text-primary text-decoration-none">Read More...</a>
+                                    <a href="{{ route('pojok-cerita.thumb', $mainArticle->id) }}" class="text-primary text-decoration-none">Selengkapnya...</a>
                                 </div>
                             </div>
                         </div>
@@ -123,10 +143,11 @@
                               <br>
                               <span class="text-pink fw-bold">{{ ucfirst(strtolower($article->category)) }}</span>
                               <span class="text-muted ms-2">{{ $article->created_at->format('d F Y') }}</span>
+                              <span class="text-muted ms-2">{{ number_format((int)($article->views ?? 0)) }} kali dibaca</span>
                           </div>
                           <h5 class="fw-bold text-dark">{{ $article->title }}</h5>
                           <p class="text-muted small">{{ Str::limit(strip_tags($article->body), 100, '...') }}</p>
-                          <a href="{{ route('pojok-cerita.thumb', $article->id) }}" class="text-pink fw-bold text-decoration-none">Read More...</a>
+                          <a href="{{ route('pojok-cerita.thumb', $article->id) }}" class="text-pink fw-bold text-decoration-none">Selengkapnya...</a>
                       </div>
                   </div>
               </div>
@@ -202,30 +223,21 @@
                             @endif
                             <div class="card-body px-0">
                                 <div class="article-meta mb-2">
-                                    <span class="text-pink fw-bold">Berita</span>
+                                    <span class="badge bg-primary">Berita</span>
                                     <span class="text-muted ms-2">{{ $news->created_at->format('d M Y') }}</span>
                                 </div>
-                                <h5 class="fw-bold text-dark">{{ Str::limit($news->title, 60) }}</h5>
-                                <p class="text-muted small">{{ Str::limit(strip_tags($news->content), 100) }}</p>
-                                <a href="{{ route('news.show', $news->slug) }}" 
-                                   class="text-pink fw-bold text-decoration-none">Baca Selengkapnya...</a>
+                                <h5 class="fw-bold text-dark">{{ $news->title }}</h5>
+                                <p class="text-muted small">{{ Str::limit(strip_tags($news->content), 120) }}</p>
+                                <a href="{{ route('news.show', $news->slug) }}" class="text-primary fw-bold text-decoration-none">Baca Selengkapnya...</a>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
             @else
-                <!-- No News Available -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="text-center py-5">
-                            <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
-                            <h4 class="text-muted">Belum ada berita</h4>
-                            <p class="text-muted">Berita akan segera hadir di sini</p>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-muted">Belum ada berita.</p>
             @endif
+
         </div>
     </section>
 

@@ -32,7 +32,7 @@ class PojokCeritaController extends Controller
             }
         }
 
-        $query = SastraTulis::query()->latest();
+        $query = SastraTulis::query()->where('status', 'PUBLISHED')->latest();
         if ($normalizedCategory) {
             $query->where('category', $normalizedCategory);
         }
@@ -44,6 +44,37 @@ class PojokCeritaController extends Controller
         return view('pages.pojok-cerita.index', compact('posts', 'activeCategory'));
     }
 
+    public function search(Request $request)
+    {
+        $query = SastraTulis::query()->where('status', 'PUBLISHED');
+        
+        // Search by title
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->title . '%');
+        }
+        
+        // Filter by category
+        if ($request->filled('category') && $request->category !== 'Genre') {
+            $categoryMap = [
+                'cerpen' => 'CERPEN',
+                'puisi' => 'PUISI', 
+                'karya-pegawai' => 'KARYA PEGAWAI',
+                'karyapegawai' => 'KARYA PEGAWAI',
+            ];
+            
+            $category = $request->category;
+            if (isset($categoryMap[strtolower($category)])) {
+                $query->where('category', $categoryMap[strtolower($category)]);
+            } else {
+                $query->where('category', $category);
+            }
+        }
+        
+        $results = $query->latest()->paginate(12)->withQueryString();
+        
+        return view('pages.pojok-cerita.search', compact('results'));
+    }
+
     public function showThumb($id)
     {
         $post = SastraTulis::findOrFail($id);
@@ -53,6 +84,13 @@ class PojokCeritaController extends Controller
     public function showOpenBook($id)
     {
         $post = SastraTulis::findOrFail($id);
+
+        // Increment views once per session per post
+        $sessionKey = 'sastra_viewed_' . $post->id;
+        if (!session()->has($sessionKey)) {
+            $post->increment('views');
+            session()->put($sessionKey, true);
+        }
 
         // Prepare word-based pagination (500 words per page)
         $plainText = trim(preg_replace('/\s+/', ' ', strip_tags($post->body)));
@@ -107,5 +145,33 @@ class PojokCeritaController extends Controller
         return redirect()
             ->route('pojok-cerita.open-book', array_filter(['id' => $post->id] + $query))
             ->with('success', 'Komentar berhasil dikirim.');
+    }
+
+    public function deleteComment(Request $request, $id, $commentId)
+    {
+        $post = SastraTulis::findOrFail($id);
+        $comment = Comment::findOrFail($commentId);
+
+        // Check if user can delete this comment
+        $user = $request->user();
+        if (!$user) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // User can delete if they own the comment or if they are admin
+        if ($comment->user_id !== $user->id && $user->role !== 'ADMIN') {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $comment->delete();
+
+        $query = [];
+        if ($request->has('page')) {
+            $query['page'] = (int) $request->input('page');
+        }
+
+        return redirect()
+            ->route('pojok-cerita.open-book', array_filter(['id' => $post->id] + $query))
+            ->with('success', 'Komentar berhasil dihapus.');
     }
 }

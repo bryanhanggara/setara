@@ -55,6 +55,7 @@
                                             <th>Gambar</th>
                                             <th>Judul</th>
                                             <th>Kategori</th>
+                                            <th>Status</th>
                                             <th>Isi</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -72,8 +73,22 @@
                                             </td>
                                             <td>{{ $item->title }}</td>
                                             <td>{{ ucfirst(strtolower($item->category)) }}</td>
+                                            <td>
+                                                <span class="badge {{ $item->status === 'PUBLISHED' ? 'badge-success' : ($item->status === 'PENDING' ? 'badge-warning' : 'badge-danger') }}">
+                                                    {{ ucfirst(strtolower($item->status)) }}
+                                                </span>
+                                            </td>
                                             <td>{{ Str::limit(strip_tags($item->body), 50, '...') }}</td>
                                             <td>
+                                                @if($item->status === 'PENDING')
+                                                <form action="{{ route('sastra.approve', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Publish karya ini?');">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-success btn-sm">
+                                                        Publish
+                                                    </button>
+                                                </form>
+                                                @endif
                                                 <a href="{{ route('sastra.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                                     <i class="fa fa-pen"></i>
                                                 </a>

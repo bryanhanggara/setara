@@ -30,9 +30,17 @@
         <li class="nav-item">
           <a class="nav-link {{ ($activeCategory ?? '') === 'KARYA PEGAWAI' ? 'active' : '' }}" href="{{ route('pojok-cerita.index', ['category' => 'karya-pegawai']) }}">Karya Pegawai</a>
         </li>
-        <li class="nav-item ms-auto">
+        <li class="nav-item ms-auto d-flex align-items-center">
           <a class="nav-link text-muted" href="{{ route('pojok-cerita.index') }}">See All</a>
         </li>
+        @auth
+        <li class="nav-item ms-2">
+          <a class="btn btn-primary btn-sm" href="{{ route('pojok-cerita.submit.create') }}">Tulis Karya</a>
+        </li>
+        <li class="nav-item ms-2">
+          <a class="btn btn-outline-secondary btn-sm" href="{{ route('pojok-cerita.my-works') }}">Karya Saya</a>
+        </li>
+        @endauth
       </ul>
   
       <div class="row g-4">
@@ -49,7 +57,7 @@
                 </div>
                 <h5 class="fw-bold text-dark">{{ $post->title }}</h5>
                 <p class="text-muted small">{!! \Illuminate\Support\Str::limit(strip_tags($post->body), 140) !!}</p>
-                <a href="{{ route('pojok-cerita.thumb', $post->id) }}" class="text-pink fw-bold text-decoration-none">Read More...</a>
+                <a href="{{ route('pojok-cerita.thumb', $post->id) }}" class="text-pink fw-bold text-decoration-none">Selengkapnya...</a>
               </div>
             </div>
           </div>

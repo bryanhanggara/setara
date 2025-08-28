@@ -7,13 +7,13 @@
           <div class="col-lg-12 hero-text text-center">
             <h1 class="display-5 mb-3">Berita Terkini</h1>
             <p>Dapatkan informasi terbaru seputar dunia sastra dan budaya</p>
-            <a href="#list" class="btn btn-pink mt-3">Baca Cerita</a>
+            <a href="#list" class="btn btn-pink mt-3">Baca Berita</a>
           </div>
         </div>
       </div>
 </section>
 
-<div class="container">
+<div class="container" id="list">
     <div class="row">
         @forelse($news as $item)
         <div class="col-lg-4 col-md-6 mb-4">

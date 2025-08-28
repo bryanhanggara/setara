@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jelita - Jendela Literasi Tinta Emas Warga Binaan</title>
+    <title>Setara - </title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,21 +35,28 @@
                         <a class="nav-link text-primary" href="{{ url('/') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-primary" href="{{ url('/pojok-cerita') }}">Pojok Cerita</a>
+                        <a class="nav-link text-primary" href="{{ url('/tentang-jelita') }}">Tentang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-primary" href="{{ route('news.index') }}">Berita</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-primary" href="{{ url('/tentang-jelita') }}">Tentang</a>
+                        <a class="nav-link text-primary" href="{{ url('/pojok-cerita') }}">Pojok Cerita</a>
                     </li>
+                   
+                  
                 </ul>
                 
                 <div class="d-flex align-items-center">
                     <button class="btn btn-link text-primary me-3">
                         <i class="fas fa-search"></i>
                     </button>
-                    <button class="btn btn-primary">Masuk</button>
+                    @guest
+                    <a  href="{{ route('login') }}" class="btn btn-primary">Masuk</a>
+                    @endguest
+                    @auth
+                    <a  href="{{ route('logout') }}" class="btn btn-primary">Keluar</a>
+                    @endauth
                 </div>
             </div>
         </div>
@@ -79,7 +86,7 @@
           <hr style="border-color: #f47ce0; width: 90%; margin: 0 auto;">
       
           <p class="mt-3 text-dark">
-            Copyright Setara Dubasnas Inc © 2025. All Right Reserved
+            Hak Cipta SETARA Duta Bahasa Sumatra Selatan 2025. Semua Hak Dilindungi Undang Undang
           </p>
         </div>
       </footer>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SastraTulis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SastraTulisController extends Controller
 {
@@ -31,6 +32,8 @@ class SastraTulisController extends Controller
             $validated['image'] = $request->file('image')->store('sastra-tulis', 'public');
         }
 
+        $validated['status'] = 'PUBLISHED';
+        $validated['views'] = 0;
         SastraTulis::create($validated);
 
         return redirect()->route('sastra.index')->with('success', 'Sastra Tulis berhasil ditambahkan.');
@@ -70,5 +73,11 @@ class SastraTulisController extends Controller
         $sastraTuli->delete();
 
         return redirect()->route('sastra.index')->with('success', 'Sastra Tulis berhasil dihapus.');
+    }
+
+    public function approve(SastraTulis $sastraTuli)
+    {
+        $sastraTuli->update(['status' => 'PUBLISHED']);
+        return redirect()->route('sastra.index')->with('success', 'Karya berhasil dipublish.');
     }
 }

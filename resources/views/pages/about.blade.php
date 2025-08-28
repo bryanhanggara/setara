@@ -6,8 +6,8 @@
         <div class="container my-5">
             <div class="hero row align-items-center">
               <div class="col-lg-12 hero-text text-center">
-                <h1 class="display-5 mb-3">Kenalan Dengan Kami</h1>
-                <p>Dari Duta Bahasa dan Balai Bahasa Provinsi Sumatera Selatan, untuk harapan di balik jeruji
+                <h1 class="display-5 mb-3">Berkenalan Dengan Kami                </h1>
+                <p>Dari Duta Bahasa dan Balai Bahasa Provinsi Sumatra Selatan, untuk harapan di balik jeruji
                 </p>
                 <button class="btn btn-pink mt-3">Lihat Selengkapnya</button>
               </div>
@@ -22,7 +22,7 @@
             <h6 class="text-uppercase text-secondary fw-bold">SETARA</h6>
             <h2 class="fw-bold display-5">Sembuh dan Tumbuh Bersama Sastra</h2>
             <p class="text-muted mt-3">
-              Sebuah inisiatif literasi yang digagas oleh Duta Bahasa Sumatra Selatan bersama Balai Bahasa Provinsi Sumatera Selatan.
+              Sebuah inisiatif literasi yang digagas oleh Duta Bahasa Sumatra Selatan bersama Balai Bahasa Provinsi Sumatra Selatan.
             </p>
           </div>
       

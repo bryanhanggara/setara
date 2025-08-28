@@ -68,11 +68,11 @@
                                             </td>
                                             <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                             <td>
-                                                <a href="{{ route('admin.news.edit', $item->id) }}" 
+                                                <a href="{{ route('admin.news.edit', $item) }}" 
                                                    class="btn btn-sm btn-info">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('admin.news.destroy', $item->id) }}" 
+                                                <form action="{{ route('admin.news.destroy', $item) }}" 
                                                       method="POST" 
                                                       class="d-inline"
                                                       onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">

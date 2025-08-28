@@ -14,11 +14,19 @@ class SastraTulis extends Model
         'category',
         'body',
         'image',
+        'views',
+        'status',
+        'user_id',
     ];
 
     public function comments()
     {
         return $this->hasMany(Comment::class, 'sastra_tulis_id')->latest();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

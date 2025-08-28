@@ -19,7 +19,11 @@ class HomeController extends Controller
         // Ambil berita terbaru untuk ditampilkan di welcome page
         $latestNews = News::published()->latest()->take(3)->get();
 
-        return view('welcome', compact('mainArticle', 'smallArticles', 'latestNews'));
+        // Baru Saja Terbit & Terpopuler
+        $recentArticles = SastraTulis::latest()->take(2)->get();
+        $popularArticles = SastraTulis::orderByDesc('views')->take(2)->get();
+
+        return view('welcome', compact('mainArticle', 'smallArticles', 'latestNews', 'recentArticles', 'popularArticles'));
     }
 
     public function tentang()
