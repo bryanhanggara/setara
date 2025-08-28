@@ -54,6 +54,7 @@
                                             <th>#</th>
                                             <th>Gambar</th>
                                             <th>Judul</th>
+                                            <th>Penulis</th>
                                             <th>Kategori</th>
                                             <th>Status</th>
                                             <th>Isi</th>
@@ -71,6 +72,7 @@
                                                     <span class="text-muted">Tidak ada</span>
                                                 @endif
                                             </td>
+                                            <td>{{$item->user->name}}</td>
                                             <td>{{ $item->title }}</td>
                                             <td>{{ ucfirst(strtolower($item->category)) }}</td>
                                             <td>

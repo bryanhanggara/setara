@@ -50,7 +50,7 @@
          <input type="hidden" name="page" value="{{ $current ?? 1 }}">
          <input name="body" type="text" class="form-control me-2" placeholder="Tulis Komentar Disini..." required minlength="3" maxlength="2000" />
          <button class="btn btn-primary" type="submit">
-           <i class="bi bi-send">Kirim</i>
+           <i class="bi bi-send"></i>
          </button>
        </form>
        @else

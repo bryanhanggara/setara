@@ -31,9 +31,9 @@
                             <div class="col-md-5">
                                 <select name="category" class="form-select">
                                     <option value="">Semua Kategori</option>
-                                    <option value="CERPEN" {{ request('category') == 'CERPEN' ? 'selected' : '' }}>Cerpen</option>
-                                    <option value="PUISI" {{ request('category') == 'PUISI' ? 'selected' : '' }}>Puisi</option>
-                                    <option value="KARYA PEGAWAI" {{ request('category') == 'KARYA PEGAWAI' ? 'selected' : '' }}>Karya Pegawai</option>
+                                    <option value="CERPEN" {{ request('category') == 'CERPEN' ? 'selected' : '' }}>Pentigraf</option>
+                                    
+                                    
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -284,7 +284,7 @@
           
           <form action="{{ route('newsletter.subscribe') }}" method="POST" class="d-flex justify-content-center flex-wrap gap-2 mb-3">
             @csrf
-            <input type="email" name="email" class="form-control form-control-lg email-input" placeholder="Masukkan email Anda" required>
+            <input type="email" name="email" class="form-control form-control-lg email-input" placeholder="Pos el" required>
             <button type="submit" class="btn btn-light btn-lg fw-semibold">Berlangganan</button>
           </form>
       

@@ -22,14 +22,12 @@
           <a class="nav-link fw-bold {{ empty($activeCategory) ? 'active' : '' }}" href="{{ route('pojok-cerita.index') }}">Semua</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ ($activeCategory ?? '') === 'CERPEN' ? 'active' : '' }}" href="{{ route('pojok-cerita.index', ['category' => 'cerpen']) }}">Cerpen</a>
+          <a class="nav-link {{ ($activeCategory ?? '') === 'CERPEN' ? 'active' : '' }}" href="{{ route('pojok-cerita.index', ['category' => 'cerpen']) }}">Pentigraf</a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link {{ ($activeCategory ?? '') === 'PUISI' ? 'active' : '' }}" href="{{ route('pojok-cerita.index', ['category' => 'puisi']) }}">Puisi</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ ($activeCategory ?? '') === 'KARYA PEGAWAI' ? 'active' : '' }}" href="{{ route('pojok-cerita.index', ['category' => 'karya-pegawai']) }}">Karya Pegawai</a>
-        </li>
+        </li> --}}
+
         <li class="nav-item ms-auto d-flex align-items-center">
           <a class="nav-link text-muted" href="{{ route('pojok-cerita.index') }}">See All</a>
         </li>

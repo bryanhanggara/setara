@@ -85,7 +85,7 @@
           <hr style="border-color: #f47ce0; width: 90%; margin: 0 auto;">
       
           <p class="mt-3 text-dark">
-            Hak Cipta SETARA Duta Bahasa Sumatra Selatan 2025. Semua Hak Dilindungi Undang Undang
+            Hak Cipta SETARA Duta Bahasa Sumatra Selatan 2025. Semua Hak Dilindungi Undang-Undang
           </p>
         </div>
       </footer>

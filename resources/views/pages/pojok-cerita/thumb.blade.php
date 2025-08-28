@@ -14,6 +14,7 @@
        </div>
        <div class="col-md-7 ps-md-5 pt-4 pt-md-0 position-relative z-1">
          <h2 class="fw-bold text-primary mb-3">{{ $post->title }}</h2>
+         <h6>Karya : {{$post->user->name}}</h6>
          <div class="text-secondary mb-4">
             {!! Str::limit(strip_tags($post->body), 150, '...') !!}
         </div>
