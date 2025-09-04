@@ -72,8 +72,8 @@
                                                     <span class="text-muted">Tidak ada</span>
                                                 @endif
                                             </td>
-                                            <td>{{$item->user->name}}</td>
                                             <td>{{ $item->title }}</td>
+                                            <td>{{ $item->penulis ?? $item->user->name }}</td>
                                             <td>{{ ucfirst(strtolower($item->category)) }}</td>
                                             <td>
                                                 <span class="badge {{ $item->status === 'PUBLISHED' ? 'badge-success' : ($item->status === 'PENDING' ? 'badge-warning' : 'badge-danger') }}">

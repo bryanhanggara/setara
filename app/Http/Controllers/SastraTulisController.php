@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SastraTulis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class SastraTulisController extends Controller
@@ -23,6 +24,7 @@ class SastraTulisController extends Controller
     {
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
+            'penulis'   => 'required|string|max:255',
             'category'  => 'required|in:CERPEN,PUISI,KARYA PEGAWAI',
             'body'      => 'required',
             'image'     => 'required|image|mimes:jpeg,png,jpg|max:2048'
@@ -34,6 +36,7 @@ class SastraTulisController extends Controller
 
         $validated['status'] = 'PUBLISHED';
         $validated['views'] = 0;
+        $validated['user_id'] = Auth::id();
         SastraTulis::create($validated);
 
         return redirect()->route('sastra.index')->with('success', 'Sastra Tulis berhasil ditambahkan.');
@@ -48,6 +51,7 @@ class SastraTulisController extends Controller
     {
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
+            'penulis'   => 'required|string|max:255',
             'category'  => 'required|in:CERPEN,PUISI,KARYA PEGAWAI',
             'body'      => 'required',
             'image'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048'

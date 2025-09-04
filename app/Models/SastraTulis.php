@@ -11,6 +11,7 @@ class SastraTulis extends Model
 
     protected $fillable = [
         'title',
+        'penulis',
         'category',
         'body',
         'image',

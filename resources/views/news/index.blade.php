@@ -38,7 +38,7 @@
                     <div class="mt-auto">
                         <small class="text-muted">
                             <i class="fas fa-calendar-alt"></i> 
-                                                            @indonesianDateShort($item->created_at)
+                            {{ $item->created_at->format('d M Y') }}
                         </small>
                     </div>
                 </div>

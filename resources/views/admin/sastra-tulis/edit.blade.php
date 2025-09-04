@@ -37,6 +37,15 @@
                             @enderror
                         </div>
 
+                        {{-- Penulis --}}
+                        <div class="mb-3">
+                            <label for="penulis" class="form-label">Penulis</label>
+                            <input type="text" name="penulis" id="penulis" class="form-control @error('penulis') is-invalid @enderror" value="{{ old('penulis', $sastraTuli->penulis) }}" required>
+                            @error('penulis')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         {{-- Image --}}
                         <div class="mb-3">
                             <label for="image" class="form-label">Gambar</label>

@@ -66,13 +66,13 @@
                                                     {{ $item->status === 'published' ? 'Dipublikasi' : 'Draft' }}
                                                 </span>
                                             </td>
-                                            <td>@indonesianDateTime($item->created_at)</td>
+                                            <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                             <td>
-                                                <a href="{{ route('admin.news.edit', $item) }}" 
+                                                <a href="{{ route('admin.news.edit', $item->id) }}" 
                                                    class="btn btn-sm btn-info">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('admin.news.destroy', $item) }}" 
+                                                <form action="{{ route('admin.news.destroy', $item->id) }}" 
                                                       method="POST" 
                                                       class="d-inline"
                                                       onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">

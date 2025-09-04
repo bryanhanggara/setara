@@ -11,6 +11,7 @@
      <!-- Judul dan Konten -->
      <div class="mb-4">
        <h2 class="fw-bold text-primary">{{ $post->title }}</h2>
+       <p class="text-muted mb-3"><strong>Penulis:</strong> {{ $post->penulis ?? $post->user->name }}</p>
        <div class="text-muted">
         {!! $post->body !!}
     </div>

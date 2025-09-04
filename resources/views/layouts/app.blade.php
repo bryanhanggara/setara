@@ -56,8 +56,12 @@
                     <a  href="{{ route('login') }}" class="btn btn-primary">Masuk</a>
                     @endguest
                     @auth
-                    <a  href="{{ route('logout') }}" class="btn btn-primary">Keluar</a>
+                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Keluar</button>
+                        </form>
                     @endauth
+                
                 </div>
             </div>
         </div>

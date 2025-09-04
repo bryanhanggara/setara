@@ -54,6 +54,7 @@
                   <span class="text-muted ms-2">@indonesianDateShort($post->created_at)</span>
                 </div>
                 <h5 class="fw-bold text-dark">{{ $post->title }}</h5>
+                <p class="text-muted small mb-2"><strong>Penulis:</strong> {{ $post->penulis ?? $post->user->name }}</p>
                 <p class="text-muted small">{!! \Illuminate\Support\Str::limit(strip_tags($post->body), 140) !!}</p>
                 <a href="{{ route('pojok-cerita.thumb', $post->id) }}" class="text-pink fw-bold text-decoration-none">Selengkapnya...</a>
               </div>

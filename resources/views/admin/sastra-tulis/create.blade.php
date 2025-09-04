@@ -32,6 +32,12 @@
                             <label for="title" class="form-label">Judul</label>
                             <input type="text" name="title" id="title" class="form-control" required>
                         </div>
+                        
+                        {{-- Penulis --}}
+                        <div class="mb-3">
+                            <label for="penulis" class="form-label">Penulis</label>
+                            <input type="text" name="penulis" id="penulis" class="form-control" required>
+                        </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Gambar</label>
                             <input type="file" name="image" id="image" class="form-control" required>

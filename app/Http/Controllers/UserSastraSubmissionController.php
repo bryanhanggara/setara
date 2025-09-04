@@ -30,6 +30,7 @@ class UserSastraSubmissionController extends Controller
         $validated['status'] = 'PENDING';
         $validated['views'] = 0;
         $validated['user_id'] = Auth::id();
+        $validated['penulis'] = Auth::user()->name;
 
         SastraTulis::create($validated);
 
@@ -78,6 +79,7 @@ class UserSastraSubmissionController extends Controller
 
         // Reset status to PENDING when user edits their work
         $validated['status'] = 'PENDING';
+        $validated['penulis'] = Auth::user()->name;
 
         $sastraTuli->update($validated);
 
